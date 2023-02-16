@@ -209,6 +209,7 @@ struct color lookup_color_from_palette(struct node const *root, struct color col
 /// @param h Height of the image.
 void median_cut(int palette_count, struct color *image_data, int w, int h)
 {
+	assert(palette_count > 0 && palette_count <= MAX_PALETTE);
 	struct color *temp = malloc(w * h * sizeof(struct color));
 	if (temp == NULL) {
 		fatal("no memory");
@@ -291,6 +292,9 @@ int main(int argc, char *argv[])
 		case 'p':
 			if ((palette_count = parse_uint(optarg)) < 1) {
 				usage(stderr);
+			}
+			if (palette_count > MAX_PALETTE) {
+				fatal("palette size is too large, maximum is %d", MAX_PALETTE);
 			}
 			break;
 		case 'h':

@@ -12,6 +12,7 @@ release: clean
 release: mediancut
 
 install:
+	mkdir -p $(PREFIX)/bin
 	cp mediancut $(PREFIX)/bin
 
 uninstall:
